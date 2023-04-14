@@ -1,0 +1,3 @@
+A way to specify DATABASE_URL:
+	"mysql+pymysql://root:@127.0.0.1:3306/lecture3"
+the error message changed right after I alter the "create_engine()" parameter with it;
