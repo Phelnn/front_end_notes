@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>bootstrap demo</title>
+        <link href="bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        
+        <style>
+          div{
+            border: 3px solid greenyellow;
+          }
+        </style>
+    </head>
+
+    <body>
+
+      <div class="container text-center">
+        <div class="row justify-content-md-center"> <!-- row的 justify-content-md-center可以让块居中屏宽>lg960时，左右两列各占2栅格，中间列由文字内容决定宽度屏宽>md720且<lg960时，左右失限填满左右空间，中间由文字内容决定宽度屏宽<md720时，三列失限占全宽，成为三行 -->
+          <div class="col col-lg-2">
+            1 of 3
+          </div>
+          <div class="col-md-auto">
+            Variable width content
+          </div>
+          <div class="col col-lg-2">
+            3 of 3
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            1 of 3
+          </div>
+          <div class="col-md-auto">
+            Variable width content
+          </div>
+          <div class="col col-lg-2">
+            3 of 3
+          </div>
+        </div>
+      </div>
+        
+      <div class="container">
+        <div class="row">
+        <div class="col-1">1列</div>
+        <div class="col-1">2列</div>
+        <div class="col-1 col-lg-offset-8">11列</div>
+        <div class="col-1">12列</div>
+        </div>
+       </div>
+       
+       
+       <div class="container">
+        <div class="row">
+        <div class="col-md-1 col-md-push-10">1列</div>
+        <div class="col-md-1 col-md-pull-1">1列</div> 
+        </div>
+       </div>
+       
+    </body>
+</html>

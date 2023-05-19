@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                document.querySelector('#form').onsubmit=function(){
+                    const name = document.querySelector('#name').value;
+                    alert(`Hello, ${name}`)
+                };
+
+                document.querySelectorAll('.colorChange').forEach(function(button){       // 看来foreach和addEventListener都一样是function当场声明当作参数，要注意花括号和括号
+                    button.onclick = function(){
+                        document.querySelector('#Hello').style.color = button.dataset.color;
+                    }
+                });
+                
+            })
+
+            
+                    
+            
+        </script>
+        <title>My website</title>
+    </head>
+
+    <body>
+        <form id="form">
+            <input id="name" autocomplete="off" autofocus placeholder="Enter your name" type="text">
+            <input type="submit">
+        </form>
+
+        <div>
+            <h1 id="Hello">Hello</h1>
+            <button data-color="red" class="colorChange">red</button>           <!-- 这里的 data-自定义变量名 是配合前面的 tag名.dataset.自定义变量名 使用的固定语法-->
+            <button data-color="blue" class="colorChange">blue</button>
+            <button data-color="green" class="colorChange">green</button>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,2 @@
+
+socketio = SocketIO(app)

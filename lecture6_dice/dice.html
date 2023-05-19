@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dice</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" referrerpolicy="no-referrer"></script>
+        
+        <script id="result" type="text/x-handlebars-template">
+            <li>
+                you rolled:
+                <img alc="{{value}}" title="{{value}}" src="{{value}}.jpg">
+            </li>
+        </script>
+        <script>
+            // template = Handlebars.compile("<li>You roll a {{value}}</li>")      //用hendlebars创建了模板
+            
+            const template = Handlebars.compile(document.querySelector('#result').innerHTML)
+
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelector('#roll').onclick = () => {
+                    const roll = Math.floor((Math.random() * 6) + 1)
+                    const content = template({'value': roll})                //印用了模板并代入参数
+                    document.querySelector('#rolls').innerHTML += content
+                }
+            })
+        </script>
+        
+        
+
+    </head>
+
+    <body>
+        <button id="roll">roll</button>
+        <ul id="rolls"></ul>
+    </body>
+</html>

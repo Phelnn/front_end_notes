@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>First</title>
+        <script>
+            window.onpopstate = e =>{   //istory.pushState() 是一个 JavaScript 方法，可以将新的历史记录条目推入浏览器的历史堆栈中，同时也改变当前 URL，但并不会导致浏览器向服务器发送请求。这可以用于在 Web 应用程序中实现无需重新加载页面的动态 UI 更新。它接受三个参数：要添加到历史记录的状态对象、新的标题以及可选的相对 URL。
+                const data = e.state;
+                document.title = data.title;
+                document.querySelector('#body').innerHTML = data.text;
+            }
+            function load_page(name){
+                const request = new XMLHttpRequest();
+                request.open('GET', `/${name}`);            //application.py就是服务器，当前index.html就是返回到客户端的界面
+                request.onload = () => {
+                    const response = request.responseText;
+                    document.querySelector('#body').innerHTML = response;
+
+                    //改变url
+                    document.title = name;
+                    history.pushState({'title':name, 'text':response}, name, name)
+                };
+                request.send();
+            }
+            document.addEventListener('DOMContentLoaded', () => {
+                load_page('first');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.onclick = () => {
+                        load_page(link.dataset.page);
+                        return false;
+                    }
+                })
+            })
+            
+        </script>
+    </head>
+
+    <body>
+        <ul id="nav">
+            <li><a href="" class="nav-link" data-page="first">first page</a></li>
+            <li><a href="" class="nav-link" data-page="second">second page</a></li>
+            <li><a href="" class="nav-link" data-page="third">third page</a></li>
+        </ul>
+        <div id="body"></div>
+    </body>
+</html>

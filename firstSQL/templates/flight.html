@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h2>You're on the NO.{{cur_flight.id}} flight travel from {{cur_flight.origin}} to {{cur_flight.destination}}</h2>
+<table>
+    <tr><th>passengers</th></tr>
+    {% for passenger in passengers %} 
+        <tr><td>{{passenger.name}}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

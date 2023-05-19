@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title%}
+    success
+{% endblock %}
+
+{% block body %}
+    <h1>SUCCESS</h1><br>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+        </tr>
+        {% for passenger in newPassengers %}
+        <tr>   
+            <td> {{passenger.name}} </td>
+        </tr> 
+        {% endfor %}
+    </table>
+{% endblock %}

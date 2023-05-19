@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tasks</title>
+        <script>
+            document.addEventListener('DOMContentLoaded',() => {
+                document.querySelector('#new-task').onsubmit = () => {
+                    const li = document.createElement('li');
+                    li.innerHTML = document.querySelector('#task').value;
+
+                    document.querySelector('#tasks').append(li);
+
+                    document.querySelector('#task').value = '';
+
+                    return false  //这句可以阻止表单提交后转到新网站
+                };
+            });
+            
+        </script>
+    </head>
+
+    <body>
+        <h1>Tasks</h1>
+        <ul id="tasks">
+
+        </ul>
+        <form id="new-task">
+            <input id="task" autocomplete="off" autofocus placeholder="New Task" type="text">
+            <input type="submit">
+        </form>
+    </body>
+</html>

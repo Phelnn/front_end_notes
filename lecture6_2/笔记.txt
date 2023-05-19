@@ -1,0 +1,8 @@
+再次踩坑：在js中使用DOM需要在html内容渲染完毕后才能选中元素，所以要么把js函数放在addEventListener('DOMContentLoaded', ...)中，要么放在html的相关内容后
+另外：注意是'DOMContentLoaded'不是'DOMcontentloaded'！大小写很重要，这个错误不仅编辑器识别不出，浏览器的控制台也不会报错
+还有: for(let i=0; i<100; i++)，注意是分号不是逗号
+
+匿名函数() => {}  理解为 Function annonymous()
+相应的 someName => {} 为 Function someName()
+
+新报错：

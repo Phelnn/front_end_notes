@@ -1,0 +1,36 @@
+<!DOCTYPE html> <!--这个文件是用来测试滑到页底变色效果的-->
+<html>
+    <head>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                for(let i=0; i<100; i++){
+                const newPosts = document.createElement('p')
+                newPosts.innerHTML = `This is my ${i}th day working on my dream!`
+                document.querySelector('#posts').append(newPosts)
+                console.log(i)                    
+                }
+
+                window.onscroll = () => {
+                console.log('----')
+                console.log(window.innerHeight)
+                console.log(window.scrollY)
+                console.log(document.body.offsetHeight)
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight){
+                    document.querySelector('body').style.backgroundColor = 'green'
+                }else{
+                    document.querySelector('body').style.background = 'white'
+                }
+            }
+
+            })
+            
+          
+            
+        </script>
+        <title>scroll</title>
+    </head>
+
+    <body>
+        <div id="posts"></div>
+    </body>
+</html>

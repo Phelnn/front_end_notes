@@ -1,0 +1,69 @@
+遇到的问题：
+document.domain被禁用了，我想找找能替代的方法
+用到的代码片段：
+var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port)
+
+尝试1：用'127.0.0.1'代替
+尝试2：参考gpt回答，用'window.location.hostname'代替
+——————————————————————————————
+
+找的过程中学习了禁用这个方法的原因：
+因为这个方法的调用对开发者来说不安全。大部分浏览器为了安全被设计为限制跨域访问
+（跨域访问就是运行在A域名的JS代码发起了对B域名的访问）。因此， 只有从同一个域名对网站
+发起的访问会被允许。但是域名有三级，document.domain只包含一级和二级，且可以被更改，
+即可以用这个漏洞实现跨域访问。
+
+www  .  bing  .  com
+三级       二级      一级
+
+_______________________________
+
+Failed to load resource: the server responded with a status of 404 (NOT FOUND)                  index.js:1     
+浏览器端控制台报这个错误。
+
+有可能是python的flask默认静态寻址在templates下的static文件夹
+尝试把index.js放到html所在的template文件夹的上一级文件夹，并改变html中对index.js的寻址方式出现新报错
+GET http://127.0.0.1:5000/index.js net::ERR_ABORTED 404 (NOT FOUND)                             127.0.0.1/:5
+
+再次更改寻址方式为<script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
+新报错：Uncaught ReferenceError: io is not defined                                               index.js:2 
+    at HTMLDocument.<anonymous> (index.js:2:18)
+
+可能是因为引用的js库没有加载成功。补充了<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js" integrity="sha512-xbQU0+iHqhVt7VIXi6vBJKPh3IQBF5B84sSHdjKiSccyX/1ZI7Vnkt2/8y8uruj63/DVmCxfUNohPNruthTEQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+新报错：RuntimeError: You need to use the gevent-websocket server. See the Deployment section of the documentation for more information.
+
+据说是因为服务器上使用的gevent库与本地不同，python的flask服务器使用的是gevent-socketio。但是明明python文件中和js文件中都引入了socketio？
+怀疑是引入的js库与gevent-socketio不符。
+结论：是该博主表述不清晰，他指的是自己pip安装了包，但py文件中没有import。报错指的是明明有调用socket功能，却没使用socket服务器启动程序。
+尝试将app.run(app)改为socketio.run(app, host='0.0.0.0', debug=True)
+
+出现新问题，终端信息停留在
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 993-256-440
+ 不继续输出了（陷入死循环），正常情况应该会显示更多信息和调试网站url。参考了gpt回答有一个标准debug的方法如下：
+ {
+ 如果您已经将调试模式设置为True，并且没有看到任何错误消息或堆栈跟踪，那么您可能需要检查是否有代码陷入了死循环或者程序进入了死锁状态。
+
+您可以尝试在Flask启动时打开日志记录的功能，以便记录更多详细的信息，以帮助您找出问题所在。您可以通过以下方式启用日志记录:
+import logging
+from flask import Flask
+
+app = Flask(__name__)
+
+if not app.debug:
+    # 非调试模式下启用日志记录
+    log_handler = logging.FileHandler('flask.log')
+    log_handler.setLevel(logging.WARNING)
+    app.logger.addHandler(log_handler)
+
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+
+当您遇到问题时，查看flask.log文件以获取更多错误和警告信息，以便更好地了解进程中正在发生的事情。
+ }
+但是这个方法在这里暂时没用，代码没有执行到设置日志记录这一块。
+ 
+
+
