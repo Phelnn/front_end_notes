@@ -27,8 +27,8 @@
                         rolls.push(value)
                         total += value
                     }
-
-                    const content = tamplate({'values': rolls, 'total':total})
+                    var tpl = _.template($('#result').html())
+                    const content = tpl({'values': rolls, 'total':total})
                     document.querySelector('#rolls').innerHTML += content
                 }
             })
