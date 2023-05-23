@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- 移动的动画 -->
+<html>
+    <head>
+        <title>test</title>
+        <style>
+          @keyframes move{
+            from{
+                left: 0%
+            }
+            to{
+                left: 50%
+            }
+          }
+          h1{
+            position: relative;
+            animation-name: move;
+            animation-duration: 3s;
+            animation-fill-mode: backwards;
+          }
+        </style>
+    </head>
+
+    <body>
+      <h1>Hello!</h1>
+    </body>
+</html>

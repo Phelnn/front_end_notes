@@ -3,7 +3,7 @@
     <head>
         <title>First</title>
         <script>
-            window.onpopstate = e =>{   //istory.pushState() 是一个 JavaScript 方法，可以将新的历史记录条目推入浏览器的历史堆栈中，同时也改变当前 URL，但并不会导致浏览器向服务器发送请求。这可以用于在 Web 应用程序中实现无需重新加载页面的动态 UI 更新。它接受三个参数：要添加到历史记录的状态对象、新的标题以及可选的相对 URL。
+            window.onpopstate = e =>{           //istory.pushState() 是一个 JavaScript 方法，可以将新的历史记录条目推入浏览器的历史堆栈中，同时也改变当前 URL，但并不会导致浏览器向服务器发送请求。这可以用于在 Web 应用程序中实现无需重新加载页面的动态 UI 更新。它接受三个参数：要添加到历史记录的状态对象、新的标题以及可选的相对 URL。
                 const data = e.state;
                 document.title = data.title;
                 document.querySelector('#body').innerHTML = data.text;
@@ -23,7 +23,7 @@
             }
             document.addEventListener('DOMContentLoaded', () => {
                 load_page('first');
-                document.querySelectorAll('.nav-link').forEach(link => {
+                document.querySelectorAll('.nav-link').forEach(link => {    //link即代表显示在页面上的三个连接的变量, 作为forEach的有参函数的参数
                     link.onclick = () => {
                         load_page(link.dataset.page);
                         return false;

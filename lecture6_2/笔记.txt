@@ -3,6 +3,10 @@
 还有: for(let i=0; i<100; i++)，注意是分号不是逗号
 
 匿名函数() => {}  理解为 Function annonymous()
-相应的 someName => {} 为 Function someName()
+相应的 someName => {} 为 Function annonymous(someName)
 
-新报错：
+数组.forEach()  等于轮流执行  forEach(每一个数组元素)
+_____________________________________
+animation部分
+
+现在进行到给按钮添加博文消失再删除的效果,尝试和视频写不同的代码达到相同的效果
