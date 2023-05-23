@@ -18,7 +18,7 @@
             document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('#roll').onclick = () => {
                     const roll = Math.floor((Math.random() * 6) + 1)
-                    const content = template({'value': roll})                //印用了模板并代入参数
+                    const content = template({'value': roll})                //引用了模板并代入参数
                     document.querySelector('#rolls').innerHTML += content
                 }
             })

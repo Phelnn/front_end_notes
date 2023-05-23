@@ -1,0 +1,9 @@
+浏览器报错Uncaught ReferenceError: template is not defined
+
+经排查发现，1:02:01有一句关键的在我的代码中漏掉了。
+<script type="text/template" id="aaa">其实就是一个装被编译的文本的大框，要Handlebars.complie()过innerHTML才能用
+第一次我漏掉了一整句compile
+第二次我漏掉了innerHTML,导致报了一个引用外部handlebars文件内compile的奇怪错误,其实就是传进去的参数不对
+注,这个奇怪的报错内容为:
+Uncaught d                            handlebars.min.js:28 
+这就是原文

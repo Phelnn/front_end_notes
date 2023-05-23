@@ -3,23 +3,24 @@
     <head>
         <title>multiDice</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" referrerpolicy="no-referrer"></script>
-    
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.js" integrity="sha512-c7SfJeKRl8g7wgL+zMGX78faYVGp+NZVQ587mRLrqeLySX/qHCQOKw/iZ5Pp64DaPjvedixWC/Fe73upnhBaRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js" integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script id="result" type="text/template">
             <li>
                 You rolled:
-                {{#each values}}
-                    <img alt="{{this}}" title="{{this}}" src="{{this}}.png">
+                {{#each values}}     <!--values是数组， each是关键词， 下面的this是和each联用指当前循环的数组元素-->
+                    <img alt="{{this}}" title="{{this}}" src="{{this}}.jpg">
                 {{/each}}
                 (Total: {{total}})
             </li>
         </script>
 
-        <script>
+        <script>            
             document.addEventListener('DOMContentLoaded', () => {
+                const template = Handlebars.compile(document.querySelector('#result').innerHTML)
                 document.querySelector('#roll').onclick = () => {
-                    const counter = parseInt(document.querySelector('#counter').value)  //将输入的字符串转换为数字
+                    const counter = parseInt(document.querySelector('#counter').value)  //该函数将输入的字符串转换为数字
                     const rolls = []
                     let total = 0
                     for(let i = 0; i < counter; i++){
@@ -27,8 +28,7 @@
                         rolls.push(value)
                         total += value
                     }
-                    var tpl = _.template($('#result').html())
-                    const content = tpl({'values': rolls, 'total':total})
+                    const content = template({'values': rolls, 'total':total})
                     document.querySelector('#rolls').innerHTML += content
                 }
             })
