@@ -70,6 +70,15 @@
                 
             }
             document.addEventListener('DOMContentLoaded', load)
+            document.addEventListener('click', event => {         //这里的a是一个事件对象，包含了用户点击的各种信息如坐标、鼠标按键、被点击的元素等，所以在函数体中可以通过这个参数进行调用
+                const element = event.target
+                if (element.className === 'hide'){
+                    element.parentElement.style.animationPlayState = 'running'
+                    element.parentElement.addEventListener('animationend', () =>{
+                        element.parentElement.remove()
+                    })
+                }
+            })
 
             window.onscroll = () => {
                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight){
