@@ -49,11 +49,12 @@
                     const data = JSON.parse(request.responseText) //存储由服务器回传的博文数据并转化为javascript可读的模式
                     data.forEach(add_post)  //这里看来传回来的JSON被转化后是一个数组
                 //add start and end points to request data
-                    const pdata = new FormData()
-                    pdata.append("start", start)   
-                    pdata.append("end", end)             //而这里看来发出去的FormData是一个类似python字典的数组
-                    request.send(pdata)          //传递下一次请求所需要的博文序号
                 }
+                    const data = new FormData()
+                    data.append("start", start)   
+                    data.append("end", end)             //而这里看来发出去的FormData是一个类似python字典的数组
+                    request.send(data)          //传递下一次请求所需要的博文序号
+                
             }
             function add_post(contents){
                 const post = document.createElement('div')
