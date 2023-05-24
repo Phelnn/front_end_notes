@@ -3,11 +3,19 @@
     <head>
         <style>
             @keyframes hide{
-                from{
+                0%{
                     opacity: 1;
+                    height: 100%;
+                    line-height: 100%;
+                    padding: 20px;
+                    margin-bottom: 10px;
                 }
-                to{
+                100%{
                     opacity: 0;
+                    height: 0%;
+                    line-height: 0%;
+                    padding: 0px;
+                    margin-bottom: 0px;
                 }
             }
             .post{
@@ -29,7 +37,7 @@
             const quantity = 20
 
             function load() {
-                //计算下一阶段的加载博文数据以便发送给服务器
+                //计算下一阶段的加载博文数据
                 const start = counter               
                 const end = start + quantity - 1
                 counter = end + 1
@@ -39,15 +47,15 @@
                 request.open('POST', '/posts')
                 request.onload = () => {
                     const data = JSON.parse(request.responseText) //存储由服务器回传的博文数据并转化为javascript可读的模式
-                    data.forEach(add_post)
-                }
+                    data.forEach(add_post)  //这里看来传回来的JSON被转化后是一个数组
                 //add start and end points to request data
-                const data = new FormData()
-                data.append("start", start)   
-                data.append("end", end)
-                request.send(data)          //传递下一次请求所需要的博文序号
+                }
+                    const data = new FormData()
+                    data.append("start", start)   
+                    data.append("end", end)             //而这里看来发出去的FormData是一个类似python字典的数组
+                    request.send(data)          //传递下一次请求所需要的博文序号
+                
             }
-            
             function add_post(contents){
                 const post = document.createElement('div')
                 post.className = 'post'
@@ -58,13 +66,13 @@
                 hide.innerHTML = 'Hide'
                 post.append(hide)
 
-                hide.onclick= function(){
-                    this.parentElement.style.animationPlayState = 'running'
-                    this.addEventListener('animationend', () => {
-                        this.parentElement.remove()
-                    })
-                    
-                }
+                //这部分是自己试验，和示范不同的方法达到同样的效果，经过测试有效
+                // hide.onclick= function(){
+                //     this.parentElement.style.animationPlayState = 'running'
+                //     this.parentElement.addEventListener('animationend', () => {
+                //         this.parentElement.remove()
+                //     })
+                // }
 
                 document.querySelector('#posts').append(post)
                 
@@ -79,8 +87,12 @@
                     })
                 }
             })
+<<<<<<< HEAD
 
             window.onscroll = () => {
+=======
+            window.onscroll = () => {                   //这部分为什么不用加入addEventListener也可以作用？  gpt回答：这是一种早期的事件处理方式，可以直接将函数分配给window.onscroll属性来注册滚动条滚动事件，但是现在已经被addEventListener取代，而且这种方式只能注册一种处理函数，而adEventListener可以注册多个
+>>>>>>> working
                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight){
                     load()
                 }

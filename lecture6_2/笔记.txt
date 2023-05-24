@@ -2,11 +2,24 @@
 另外：注意是'DOMContentLoaded'不是'DOMcontentloaded'！大小写很重要，这个错误不仅编辑器识别不出，浏览器的控制台也不会报错
 还有: for(let i=0; i<100; i++)，注意是分号不是逗号
 
-匿名函数() => {}  理解为 Function annonymous()
+匿名函数() => {}  理解为 Function annonymous() {...}
 相应的 someName => {} 为 Function annonymous(someName)
+而用在addEventListener中，addEventListener('event', a => {} )等于addEventListener('event', function(a){} )
+同时需要注意的是，监听器的回调函数中的参数和触发监听的事件有关。譬如addEventListener('click', a => {} )，这里的a是一个事件对象，包含了用户点击的各种信息
+如坐标、鼠标按键、被点击的元素等，所以在函数体中可以通过这个参数进行调用
 
-数组.forEach()  等于轮流执行  forEach(每一个数组元素)
+
+数组.forEach(function)  等于轮流执行  function(每一个数组元素)
 _____________________________________
 animation部分
 
 现在进行到给按钮添加博文消失再删除的效果,尝试和视频写不同的代码达到相同的效果
+成功！addEvenListener可以嵌套。
+
+//这部分是自己试验，和示范不同的方法达到同样的效果，经过测试有效
+                // hide.onclick= function(){
+                //     this.parentElement.style.animationPlayState = 'running'
+                //     this.parentElement.addEventListener('animationend', () => {
+                //         this.parentElement.remove()
+                //     })
+                // }
