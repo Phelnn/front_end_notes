@@ -15,7 +15,7 @@ def posts():
 
     data = []
     for i in range(start, end + 1):
-        data.append(f"Post #{i}")
+        data.append(f"友友们这家位于解放西{i}号的宝藏小店真是爱了爱了！！！！")
 
     time.sleep(1)
 
