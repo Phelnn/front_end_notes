@@ -1,0 +1,29 @@
+注意到网课中，mysite和hello下各有一个urls.py，但是自己的项目中只有mysite下有
+gpt回答：自己创建一个。
+
+在models添加了Airport后命令行python manage.py makemigrations, cmd返回了creat model通知, 但是建表时却报错no such table: hello_airport
+一开始以为是命令行不识别大小写导致Airport当成了airport, 但是Flight却能正确引入.
+
+发现原因, 因为makemigrations只生成了转移数据库需要的语句文件(项目文件夹下新增的migrations文件夹), 还应python manage.py migrate(看网课时漏看了这句)
+cmd manage.py migrate 新报错:django.db.utils.IntegrityError: The row in table 'hello_flight' with primary key '1' has an invalid foreign key: hello_flight.origin_id contains a value 'New York' that does not have a corresponding value in hello_airport.id.
+
+
+步骤： 
+1.添加主文件夹（与父文件夹同名,这里为mysite）的urls.py,添加到项目文件夹中urls.py的路径 
+2.创建项目文件夹(这里为hello)的urls.py,添加到同文件夹下views.py的路径
+3.views.py中添加对应的响应函数
+4.models.py中建表(数据库用)
+5.apps.py中添加相关的class XXXConfig
+6.主文件夹下setting.py中把上条中的APP添加installed app
+7.命令行python manage.py makemigrations,成功的话会在项目文件夹(hello)创建一个initial.py
+8.命令行python manage.py migrate,执行建表
+(建表所在的数据库类型和名称,在主文件夹settings.py中的DATABASES类中设置. (sqlite3是django自带的数据库))
+9.命令行python manage.py shell进入django自带的shell以更方便进行数据库操作
+shell中:
+    from hello.models import Flight
+    f = Flight(origin="New York", desination="London", duration=415)
+    f.save()
+    Flight.objects.all()              %查询%
+10.在models下可以用函数定义shell中查询的返回格式,定义后要退出django shell重新进入并重新引入models
+    如果增加了新的类（即新的表型），需要重新在命令行python manage.py makemigrations
+
