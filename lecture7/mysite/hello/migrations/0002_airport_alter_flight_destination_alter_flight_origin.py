@@ -11,6 +11,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        
         migrations.CreateModel(
             name='Airport',
             fields=[
@@ -20,12 +21,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AlterField(
-            model_name='flight',
+            model_name='Flight',
             name='destination',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='arrivals', to='hello.airport'),
         ),
         migrations.AlterField(
-            model_name='flight',
+            model_name='Flight',
             name='origin',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='departures', to='hello.airport'),
         ),

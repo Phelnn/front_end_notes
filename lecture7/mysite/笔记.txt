@@ -7,6 +7,14 @@ gpt回答：自己创建一个。
 发现原因, 因为makemigrations只生成了转移数据库需要的语句文件(项目文件夹下新增的migrations文件夹), 还应python manage.py migrate(看网课时漏看了这句)
 cmd manage.py migrate 新报错:django.db.utils.IntegrityError: The row in table 'hello_flight' with primary key '1' has an invalid foreign key: hello_flight.origin_id contains a value 'New York' that does not have a corresponding value in hello_airport.id.
 
+想起来网课的第一个例子建的表, 在讲第二个例子的时候直接换了整个文件夹. 但是我在复现的时候没有换, 所以那个旧的和Airport没有关联的Flight仍然存在
+漏看了网课中的一个删除操作，其实在更新模型前老师把表删除了。
+
+解决，命令行shell
+from hello.models import Flight
+Flight.objects.all().delete()
+再退出shell进行migrate， 成功
+
 
 步骤： 
 1.添加主文件夹（与父文件夹同名,这里为mysite）的urls.py,添加到项目文件夹中urls.py的路径 
