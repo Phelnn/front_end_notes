@@ -15,6 +15,9 @@ from hello.models import Flight
 Flight.objects.all().delete()
 再退出shell进行migrate， 成功
 
+漏掉的部分：因为设置超级用户密码的时候密码不显示，不知道除了什么问题登不上图形化管理
+以及乘客少，没有触发订票部分的渲染
+
 
 步骤： 
 1.添加主文件夹（与父文件夹同名,这里为mysite）的urls.py,添加到项目文件夹中urls.py的路径 
@@ -35,3 +38,4 @@ shell中:
 10.在models下可以用函数定义shell中查询的返回格式,定义后要退出django shell重新进入并重新引入models
     如果增加了新的类（即新的表型），需要重新在命令行python manage.py makemigrations
 
+1:24：03
