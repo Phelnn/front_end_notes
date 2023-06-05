@@ -27,7 +27,7 @@ def flight(request, flight_id):
 
 def book(request, flight_id):
     try:
-        passenger_id = int(request.POST["passenger"])
+        passenger_id = int(request.POST["passenger"])           #获取在html文件中通过post提交的passenger变量数据， 对应<form action="{% url 'book' flight.id %}" method="post">
         passenger = Passenger.objects.get(pk=passenger_id)
         flight = Flight.objects.get(pk=flight_id)
     except KeyError:

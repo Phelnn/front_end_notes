@@ -20,7 +20,7 @@
         </ul>
         <h2>Add a Passengers</h2>
         {% if non_passengers %}
-            <form action="{% url 'book' flight.id %}" method="post">
+            <form action="{% url 'book' flight.id %}" method="post">   <!--对应views文件中的 passenger_id = int(request.POST["passenger"])-->
                 {% csrf_token %}    
                 <select name="passenger">
                     {% for passenger in non_passengers %}

@@ -20,13 +20,13 @@ Flight.objects.all().delete()
 
 
 步骤： 
-1.添加主文件夹（与父文件夹同名,这里为mysite）的urls.py,添加到项目文件夹中urls.py的路径 
-2.创建项目文件夹(这里为hello)的urls.py,添加到同文件夹下views.py的路径
+1.添加主文件夹（与父文件夹同名,这里为mysite）的urls.py,添加到app文件夹中urls.py的路径 
+2.创建app文件夹(这里为hello)的urls.py,添加到同文件夹下views.py的路径
 3.views.py中添加对应的响应函数
 4.models.py中建表(数据库用)
 5.apps.py中添加相关的class XXXConfig
 6.主文件夹下setting.py中把上条中的APP添加installed app
-7.命令行python manage.py makemigrations,成功的话会在项目文件夹(hello)创建一个initial.py
+7.命令行python manage.py makemigrations,成功的话会在app文件夹(hello)创建一个initial.py
 8.命令行python manage.py migrate,执行建表
 (建表所在的数据库类型和名称,在主文件夹settings.py中的DATABASES类中设置. (sqlite3是django自带的数据库))
 9.命令行python manage.py shell进入django自带的shell以更方便进行数据库操作
