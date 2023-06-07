@@ -1,0 +1,5 @@
+遇到问题：runserver后显示template Does Not Exist ，查询后是模板寻址错误的原因
+解决方法：在settings的templates-dir[]中加入authentication下的路径后正常
+问题：为什么hello项目中没有设置也可以正常显示？
+
+自己尝试了一下，加入了settings.py中的installed app[]后就可以了，hello项目中也是这么做的

@@ -20,8 +20,8 @@ Flight.objects.all().delete()
 
 
 步骤： 
-1.添加主文件夹（与父文件夹同名,这里为mysite）的urls.py,添加到app文件夹中urls.py的路径 
-2.创建app文件夹(这里为hello)的urls.py,添加到同文件夹下views.py的路径
+1.创建app文件夹(这里为hello)的urls.py,添加到同文件夹下views.py的路径
+2.添加主文件夹（与父文件夹同名,这里为mysite）的urls.py,添加到app文件夹（hello）中urls.py的路径 
 3.views.py中添加对应的响应函数
 4.models.py中建表(数据库用)
 5.apps.py中添加相关的class XXXConfig
