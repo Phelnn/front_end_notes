@@ -1,7 +1,7 @@
 {% extends "users/base.html" %}
 
 {% block body %}
-    <h1>Hello, {{ user.first_name }}</h1>
+    <h1>Hello, {{ user.first_name }}</h1>   <!--user是django的内置模型-->
     <ul>
         <li>Currently logged in as: {{ user.username }}</li>
         <li><a href="{% url 'logout' %}">Logout</a> </li>

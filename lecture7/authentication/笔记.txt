@@ -3,3 +3,13 @@
 问题：为什么hello项目中没有设置也可以正常显示？
 
 自己尝试了一下，加入了settings.py中的installed app[]后就可以了，hello项目中也是这么做的
+新问题：点击登录后没有预期效果，（'tuple' object has no attribute 'get django）
+ 是之前添加的超级用户还是数据库里的数据？
+
+在这一段内容结束后老师会讲添加用户的方式，此外还有代码有个地方小括号收早了，漏掉了后面的变量
+
+
+总结一下运行顺序，
+runserver启动服务器，默认加载index视图函数，index函数对带着未认证user的request渲染login.html
+登录后表单提交到login_view视图函数，判断是否是注册用户，是的话渲染user.html，否则重定向到index视图函数
+登录用户在user.html界面有logout按钮，点击后注销user信息，渲染login.html
